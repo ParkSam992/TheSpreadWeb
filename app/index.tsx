@@ -2,12 +2,12 @@ import React from "react";
 import {
   Image,
   ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
   useWindowDimensions,
 } from "react-native";
-import Header from "../components/Header";
 import LeagueCard from "../components/LeagueCard";
 
 export default function HomePage() {
@@ -15,28 +15,24 @@ export default function HomePage() {
   const isMobile = width < 768;
 
   return (
-    <View className="flex-1 bg-darkGreen">
-      <ScrollView>
-        {/* Header */}
-        <Header />
-
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingBottom: isMobile ? 80 : 20 }}>
         {/* Hero Section */}
-        <View
-          className={`flex ${
-            isMobile ? "flex-col px-6" : "flex-row px-12"
-          } mt-10 items-center`}
-        >
+        <View style={[
+          styles.heroSection,
+          isMobile ? styles.heroSectionMobile : styles.heroSectionDesktop
+        ]}>
           {/* Text Content */}
-          <View className={`${isMobile ? "w-full" : "w-1/2 pr-8"}`}>
-            <Text className="text-white text-4xl font-bold leading-tight">
+          <View style={isMobile ? styles.textContentMobile : styles.textContentDesktop}>
+            <Text style={styles.heroTitle}>
               The Ultimate{"\n"}Fantasy Football{"\n"}Experience
             </Text>
-            <Text className="text-white text-base mt-4">
+            <Text style={styles.heroSubtitle}>
               Create your own league, draft your dream team, and compete with
               friends all season long.
             </Text>
-            <TouchableOpacity className="bg-green-700 mt-6 px-6 py-3 rounded-md w-40">
-              <Text className="text-white font-bold text-center">
+            <TouchableOpacity style={styles.getStartedButton}>
+              <Text style={styles.getStartedButtonText}>
                 GET STARTED
               </Text>
             </TouchableOpacity>
@@ -45,23 +41,23 @@ export default function HomePage() {
           {/* Phone Image */}
           {!isMobile && (
             <Image
-              source={require("../assets/images/fantasy-league-phone.png")} // Replace this with your phone screenshot path
-              className="w-64 h-96"
+              source={require("../assets/images/fantasy-league-phone.png")}
+              style={styles.phoneImage}
               resizeMode="contain"
             />
           )}
         </View>
 
         {/* Join a League Section */}
-        <View className="bg-softGreen mt-20 px-6 py-12 rounded-t-3xl">
-          <Text className="text-center text-3xl font-bold text-darkGreen">
+        <View style={styles.joinLeagueSection}>
+          <Text style={styles.joinLeagueTitle}>
             Join a League
           </Text>
-          <Text className="text-center text-darkGreen mt-2">
+          <Text style={styles.joinLeagueSubtitle}>
             Compete in public leagues or create your own custom league.
           </Text>
 
-          <View className="flex-row justify-center mt-8 space-x-4 flex-wrap">
+          <View style={styles.leagueCardsContainer}>
             {[1, 2, 3].map((i) => (
               <LeagueCard key={i} />
             ))}
@@ -71,3 +67,87 @@ export default function HomePage() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#003f2e',
+  },
+  heroSection: {
+    alignItems: 'center',
+  },
+  heroSectionMobile: {
+    flexDirection: 'column',
+    paddingHorizontal: 24,
+    marginTop: 24,
+  },
+  heroSectionDesktop: {
+    flexDirection: 'row',
+    paddingHorizontal: 48,
+    marginTop: 64,
+  },
+  textContentMobile: {
+    width: '100%',
+  },
+  textContentDesktop: {
+    width: '50%',
+    paddingRight: 32,
+  },
+  heroTitle: {
+    color: 'white',
+    fontSize: 36,
+    fontWeight: 'bold',
+    lineHeight: 40,
+  },
+  heroSubtitle: {
+    color: 'white',
+    fontSize: 16,
+    marginTop: 16,
+    lineHeight: 24,
+  },
+  getStartedButton: {
+    backgroundColor: '#15803d',
+    marginTop: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 6,
+    width: 160,
+  },
+  getStartedButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  phoneImage: {
+    width: 256,
+    height: 384,
+  },
+  joinLeagueSection: {
+    backgroundColor: '#f0f7f2',
+    marginTop: 80,
+    paddingHorizontal: 24,
+    paddingVertical: 48,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+  },
+  joinLeagueTitle: {
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#003f2e',
+  },
+  joinLeagueSubtitle: {
+    textAlign: 'center',
+    color: '#003f2e',
+    marginTop: 8,
+    fontSize: 16,
+  },
+  leagueCardsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 32,
+    flexWrap: 'wrap',
+    gap: 16,
+  },
+});

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 type Props = {
   title?: string;
@@ -13,10 +13,35 @@ export default function LeagueCard({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="bg-white p-5 rounded-xl shadow-md w-36 items-center mb-4 mx-2"
+      style={styles.container}
     >
-      <Text className="font-semibold text-darkGreen text-center">{title}</Text>
-      <Text className="text-darkGreen mt-1 text-sm">Details</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subtitle}>Details</Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 12,
+    boxShadow: '0px 2px 3.84px rgba(0, 0, 0, 0.25)',
+    elevation: 5,
+    width: 144,
+    alignItems: 'center',
+    marginBottom: 16,
+    marginHorizontal: 8,
+  },
+  title: {
+    fontWeight: '600',
+    color: '#003f2e',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  subtitle: {
+    color: '#003f2e',
+    marginTop: 4,
+    fontSize: 14,
+  },
+});
