@@ -94,8 +94,8 @@ npm run reset-project
 5. Implement scoring and statistics tracking
 
 ## Git Status
-- Currently on `main` branch
-- Recent commits focused on navigation system fixes and Expo Router implementation
-- Converted from React Navigation to Expo Router for better file-based routing
-- Removed NativeWind and converted to React Native StyleSheet
-- Navigation system now working properly on both desktop and mobile
+- Currently on `claude` branch
+- Recent commits: "remove unecessary", "Updates to make it look like image", "my testing"
+- babel.config.js has been deleted from the project
+- Navigation system working properly on both desktop and mobile
+- Project uses Expo Router for file-based routing with React Native StyleSheet
